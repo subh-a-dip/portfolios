@@ -186,7 +186,8 @@ export default function Hero() {
             </motion.a>
             
             <motion.a 
-              href="#contact" 
+              href="/CV Resume.pdf" 
+              download="Subhadip_Bera_CV.pdf"
               className="btn-secondary group relative overflow-hidden"
               whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.95 }}
