@@ -156,27 +156,28 @@ export default function Hero() {
           
           {/* Indian Flag */}
           <motion.div
-            className="flex items-center justify-center gap-2 mb-8"
+            className="flex items-center justify-center gap-3 mb-8 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 max-w-xs mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
           >
-            <span className="text-gray-400 text-sm">Proudly from</span>
+            <span className="text-gray-300 text-sm font-medium">Proudly from</span>
             <motion.div
-              className="text-2xl"
+              className="text-3xl"
               animate={{ 
-                opacity: [1, 0.3, 1],
-                scale: [1, 1.1, 1]
+                opacity: [1, 0.4, 1],
+                scale: [1, 1.2, 1],
+                rotate: [0, 5, -5, 0]
               }}
               transition={{ 
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
-                repeatDelay: 3
+                repeatDelay: 2
               }}
             >
               🇮🇳
             </motion.div>
-            <span className="text-gray-400 text-sm font-medium">India</span>
+            <span className="text-white text-sm font-semibold">India</span>
           </motion.div>
           
           {/* Enhanced CTA Buttons */}
