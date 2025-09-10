@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description: 'Portfolio of Subhadip Bera, CSE AI student at RCCIIT Kolkata, showcasing AI projects and web development skills',
   keywords: 'AI student, machine learning, web developer, React, Python, CSE, RCCIIT',
   authors: [{ name: 'Subhadip Bera' }],
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
