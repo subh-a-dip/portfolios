@@ -36,7 +36,10 @@ export default function Home() {
       
       <div id="contact">
         <Contact />
-      <ScheduleMeet />
+      </div>
+      
+      <div id="schedule">
+        <ScheduleMeet />
       </div>
       
       {/* Footer */}
