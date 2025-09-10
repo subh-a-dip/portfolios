@@ -131,7 +131,17 @@ export default function Contact() {
             className="glass-card p-8"
           >
             <h3 className="text-3xl font-bold mb-6">Send a Message</h3>
-            <form className="space-y-6">
+            <form 
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              className="space-y-6"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <div className="hidden">
+                <input name="bot-field" />
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -139,6 +149,8 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    required
                     className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
                     placeholder="John Doe"
                   />
@@ -149,6 +161,8 @@ export default function Contact() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    required
                     className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
                     placeholder="john@example.com"
                   />
@@ -161,6 +175,7 @@ export default function Contact() {
                 </label>
                 <input
                   type="text"
+                  name="subject"
                   className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
                   placeholder="Project Collaboration"
                 />
@@ -172,6 +187,8 @@ export default function Contact() {
                 </label>
                 <textarea
                   rows={6}
+                  name="message"
+                  required
                   className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 resize-none placeholder-gray-500"
                   placeholder="Tell me about your project or idea..."
                 ></textarea>
