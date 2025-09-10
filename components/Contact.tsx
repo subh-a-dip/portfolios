@@ -270,16 +270,14 @@ export default function Contact() {
                 <p className="text-gray-400 mb-4">Or</p>
                 <motion.button
                   onClick={() => {
-                    // Multiple fallback methods
-                    setTimeout(() => {
-                      const scheduleSection = document.getElementById('schedule')
-                      if (scheduleSection) {
-                        scheduleSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                      } else {
-                        // Scroll down by viewport height to find schedule section
-                        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
-                      }
-                    }, 100)
+                    const scheduleSection = document.getElementById('schedule')
+                    if (scheduleSection) {
+                      scheduleSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start',
+                        inline: 'nearest'
+                      })
+                    }
                   }}
                   className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center gap-3"
                   whileHover={{ scale: 1.05 }}
