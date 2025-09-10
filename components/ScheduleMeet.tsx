@@ -29,6 +29,8 @@ export default function ScheduleMeet() {
     e.preventDefault()
     setIsSubmitting(true)
     
+    console.log('Form data:', formData)
+    
     try {
       const response = await fetch('/api/schedule', {
         method: 'POST',
@@ -38,13 +40,18 @@ export default function ScheduleMeet() {
         body: JSON.stringify(formData),
       })
       
+      console.log('Response status:', response.status)
+      const result = await response.json()
+      console.log('Response data:', result)
+      
       if (response.ok) {
         setSubmitStatus('Meeting scheduled successfully!')
         setFormData({ name: '', email: '', date: '', time: '', duration: '' })
       } else {
-        setSubmitStatus('Failed to schedule meeting. Please try again.')
+        setSubmitStatus(`Failed to schedule meeting: ${result.error || 'Please try again.'}`)
       }
     } catch (error) {
+      console.error('Submit error:', error)
       setSubmitStatus('Failed to schedule meeting. Please try again.')
     }
     

@@ -268,14 +268,19 @@ export default function Contact() {
               <ContactForm />
               <div className="text-center">
                 <p className="text-gray-400 mb-4">Or</p>
-                <motion.a
-                  href="#schedule"
+                <motion.button
+                  onClick={() => {
+                    const scheduleSection = document.getElementById('schedule')
+                    if (scheduleSection) {
+                      scheduleSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
                   className="btn-secondary inline-flex items-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   📅 Schedule a Meeting
-                </motion.a>
+                </motion.button>
               </div>
             </div>
 
