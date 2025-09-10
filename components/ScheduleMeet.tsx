@@ -1,11 +1,12 @@
 'use client'
 import { motion } from 'framer-motion'
-import { Calendar, Clock, User, Send } from 'lucide-react'
+import { Calendar, Clock, User, Send, Mail } from 'lucide-react'
 import { useState } from 'react'
 
 export default function ScheduleMeet() {
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     date: '',
     time: '',
     duration: ''
@@ -39,7 +40,7 @@ export default function ScheduleMeet() {
       
       if (response.ok) {
         setSubmitStatus('Meeting scheduled successfully!')
-        setFormData({ name: '', date: '', time: '', duration: '' })
+        setFormData({ name: '', email: '', date: '', time: '', duration: '' })
       } else {
         setSubmitStatus('Failed to schedule meeting. Please try again.')
       }
@@ -110,6 +111,23 @@ export default function ScheduleMeet() {
                 required
                 className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
                 placeholder="Enter your full name"
+              />
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-2">
+                <Mail className="w-4 h-4" />
+                Your Email *
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
+                placeholder="your.email@example.com"
               />
             </div>
 

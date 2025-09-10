@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer'
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, date, time, duration } = await request.json()
+    const { name, email, date, time, duration } = await request.json()
 
     // Create transporter using Gmail
     const transporter = nodemailer.createTransport({
@@ -25,17 +25,19 @@ export async function POST(request: NextRequest) {
     // Email to you about the meeting request
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
+      replyTo: email, // Visitor's email for easy reply
       to: 'subhadipb1904@gmail.com',
       subject: `Meeting Request from ${name}`,
       html: `
         <h3>New Meeting Request</h3>
         <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <p><strong>👤 Name:</strong> ${name}</p>
+          <p><strong>📧 Email:</strong> ${email}</p>
           <p><strong>📅 Date:</strong> ${formattedDate}</p>
           <p><strong>🕐 Time:</strong> ${time}</p>
           <p><strong>⏱️ Duration:</strong> ${duration} minutes</p>
         </div>
-        <p>Someone has requested a meeting with you. Please confirm or reschedule as needed.</p>
+        <p>Someone has requested a meeting with you. You can reply directly to this email to respond to ${name}.</p>
       `,
     })
 
