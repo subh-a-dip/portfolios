@@ -54,7 +54,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-4">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-400">Available for opportunities</span>
+              <span className="text-sm text-gray-400">Available for opportunities 🇮🇳</span>
             </div>
           </div>
         </div>

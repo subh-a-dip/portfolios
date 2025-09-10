@@ -146,13 +146,38 @@ export default function Hero() {
           
           {/* Description */}
           <motion.p 
-            className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             {about.intro}
           </motion.p>
+          
+          {/* Indian Flag */}
+          <motion.div
+            className="flex items-center justify-center gap-2 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+          >
+            <span className="text-gray-400 text-sm">Proudly from</span>
+            <motion.div
+              className="text-2xl"
+              animate={{ 
+                opacity: [1, 0.3, 1],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3
+              }}
+            >
+              🇮🇳
+            </motion.div>
+            <span className="text-gray-400 text-sm font-medium">India</span>
+          </motion.div>
           
           {/* Enhanced CTA Buttons */}
           <motion.div 
