@@ -270,23 +270,24 @@ export default function Contact() {
                 <p className="text-gray-400 mb-4">Or</p>
                 <motion.button
                   onClick={() => {
-                    console.log('Schedule button clicked')
-                    const scheduleSection = document.getElementById('schedule')
-                    console.log('Schedule section found:', scheduleSection)
-                    if (scheduleSection) {
-                      scheduleSection.scrollIntoView({ behavior: 'smooth' })
-                    } else {
-                      // Fallback: scroll to bottom of page
-                      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-                    }
+                    // Multiple fallback methods
+                    setTimeout(() => {
+                      const scheduleSection = document.getElementById('schedule')
+                      if (scheduleSection) {
+                        scheduleSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      } else {
+                        // Scroll down by viewport height to find schedule section
+                        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
+                      }
+                    }, 100)
                   }}
-                  className="btn-primary inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center justify-center gap-3"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  📅 Schedule a Meeting
+                  📅 Schedule a Meeting Now
                 </motion.button>
-                <p className="text-xs text-gray-500 mt-2">Click to scroll to scheduling form below</p>
+                <p className="text-sm text-gray-400 mt-3">Book a time slot below ↓</p>
               </div>
             </div>
 
