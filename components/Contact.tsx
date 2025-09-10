@@ -270,12 +270,21 @@ export default function Contact() {
                 <p className="text-gray-400 mb-4">Or</p>
                 <motion.button
                   onClick={() => {
+                    console.log('Schedule button clicked')
                     const scheduleSection = document.getElementById('schedule')
+                    console.log('Schedule section found:', scheduleSection)
+                    
                     if (scheduleSection) {
                       scheduleSection.scrollIntoView({ 
                         behavior: 'smooth', 
                         block: 'start',
                         inline: 'nearest'
+                      })
+                    } else {
+                      // Fallback: scroll to bottom of page
+                      window.scrollTo({ 
+                        top: document.body.scrollHeight, 
+                        behavior: 'smooth' 
                       })
                     }
                   }}
