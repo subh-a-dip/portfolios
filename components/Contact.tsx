@@ -2,6 +2,139 @@
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, MapPin, Send, MessageCircle, Phone } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
+import { useState } from 'react'
+
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      
+      if (response.ok) {
+        setSubmitStatus('Message sent successfully!')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setSubmitStatus('Failed to send message. Please try again.')
+      }
+    } catch (error) {
+      setSubmitStatus('Failed to send message. Please try again.')
+    }
+    
+    setIsSubmitting(false)
+    setTimeout(() => setSubmitStatus(''), 5000)
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {submitStatus && (
+        <div className={`p-4 rounded-lg text-center font-medium ${
+          submitStatus.includes('successfully') 
+            ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+            : 'bg-red-500/20 text-red-400 border border-red-500/30'
+        }`}>
+          {submitStatus}
+        </div>
+      )}
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Your Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
+            placeholder="John Doe"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Your Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
+            placeholder="john@example.com"
+          />
+        </div>
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Subject
+        </label>
+        <input
+          type="text"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
+          placeholder="Project Collaboration"
+        />
+      </div>
+      
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Message
+        </label>
+        <textarea
+          rows={6}
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 resize-none placeholder-gray-500"
+          placeholder="Tell me about your project or idea..."
+        ></textarea>
+      </div>
+      
+      <motion.button
+        type="submit"
+        disabled={isSubmitting}
+        className="btn-primary w-full group disabled:opacity-50 disabled:cursor-not-allowed"
+        whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+      >
+        <span className="flex items-center justify-center gap-2">
+          <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </span>
+      </motion.button>
+    </form>
+  )
+}
 
 export default function Contact() {
   return (
@@ -131,81 +264,21 @@ export default function Contact() {
             className="glass-card p-8"
           >
             <h3 className="text-3xl font-bold mb-6">Send a Message</h3>
-            <form 
-              name="contact"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              className="space-y-6"
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <div className="hidden">
-                <input name="bot-field" />
+            <div className="space-y-8">
+              <ContactForm />
+              <div className="text-center">
+                <p className="text-gray-400 mb-4">Or</p>
+                <motion.a
+                  href="#schedule"
+                  className="btn-secondary inline-flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  📅 Schedule a Meeting
+                </motion.a>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 placeholder-gray-500"
-                  placeholder="Project Collaboration"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  rows={6}
-                  name="message"
-                  required
-                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-primary-500 focus:outline-none transition-all duration-300 resize-none placeholder-gray-500"
-                  placeholder="Tell me about your project or idea..."
-                ></textarea>
-              </div>
-              
-              <motion.button
-                type="submit"
-                className="btn-primary w-full group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  Send Message
-                </span>
-              </motion.button>
-            </form>
+            </div>
+
             
             {/* Decorative Elements */}
             <div className="absolute top-4 right-4 w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
