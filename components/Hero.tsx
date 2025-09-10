@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail, Download, Sparkles, Zap, Code, Cpu } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail, Download, Zap, Code, Cpu } from 'lucide-react'
 import { personalInfo, about } from '@/lib/data'
 import ParticleBackground from './ParticleBackground'
 import TypingAnimation from './TypingAnimation'
